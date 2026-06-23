@@ -24,15 +24,15 @@ function App() {
 
 useEffect(() => {
   const fetchTasks = async () => {
-  try {
-    const response = await API.get("/");
-    setTasks(response.data);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      const response = await API.get("/");
+      setTasks(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   fetchTasks();
 }, []);
@@ -49,7 +49,7 @@ const addTask = async () => {
       category,
     });
 
-    setTasks([...tasks, response.data]);
+    setTasks((prev) => [...prev, response.data]);
 
     setTask("");
     setDueDate("");
@@ -101,27 +101,21 @@ const toggleComplete = async (task) => {
 
  const saveEdit = async (index) => {
   try {
-    const task = tasks[index];
+    const original = tasks[index];
+    if (!original) return;
 
+    const pending = original.__edit || {};
     const updatedTask = {
-      ...task,
+      ...original,
       text: editText,
-      dueDate: task.__edit?.dueDate ?? task.dueDate,
-      priority: task.__edit?.priority ?? task.priority,
-      category: task.__edit?.category ?? task.category,
+      dueDate: pending.dueDate !== undefined ? pending.dueDate : original.dueDate,
+      priority: pending.priority !== undefined ? pending.priority : original.priority,
+      category: pending.category !== undefined ? pending.category : original.category,
     };
-    delete updatedTask.__edit;
 
-    const response = await API.put(
-      `/${task._id}`,
-      updatedTask
-    );
+    const response = await API.put(`/${original._id}`, updatedTask);
 
-    setTasks(
-      tasks.map((t) =>
-        t._id === task._id ? response.data : t
-      )
-    );
+    setTasks(tasks.map((t) => (t._id === original._id ? response.data : t)));
 
     setEditIndex(null);
     setEditText("");
@@ -132,7 +126,11 @@ const toggleComplete = async (task) => {
 };
 
   // compute filtered / searched / sorted list
-  const filteredTasks = tasks
+  const safeTasks = Array.isArray(tasks) ? tasks : [];
+
+const filteredTasks = safeTasks
+
+
     .filter((item) => {
       // status filter
       if (filter === "completed") return item.completed;
@@ -164,26 +162,25 @@ const toggleComplete = async (task) => {
       return 0;
     });
 
-  const total = tasks.length;
-  const completed = tasks.filter(t=>t.completed).length;
+  const total = safeTasks.length;
+  const completed = safeTasks.filter(t => t.completed).length;
   const percent = total === 0 ? 0 : Math.round((completed/total)*100);
 
   const clearCompleted = () => {
-    if (!confirm('Clear all completed tasks?')) return;
-    setTasks(tasks.filter(t=>!t.completed));
-  }
-
+  if (!confirm('Clear all completed tasks?')) return;
+  setTasks(tasks.filter(t => !t.completed));
+};
   const handleStartEdit = (index) => {
-    setEditIndex(index);
-    setEditText(tasks[index].text || '');
-  }
+  setEditIndex(index);
+  setEditText(tasks[index].text || '');
+};
 
   const updateEditField = (index, field, value) => {
-    const updatedTasks = [...tasks];
-    if (!updatedTasks[index].__edit) updatedTasks[index].__edit = {};
-    updatedTasks[index].__edit[field] = value;
-    setTasks(updatedTasks);
-  }
+  const updatedTasks = [...tasks];
+  if (!updatedTasks[index].__edit) updatedTasks[index].__edit = {};
+  updatedTasks[index].__edit[field] = value;
+  setTasks(updatedTasks);
+};
 
   
     return (
