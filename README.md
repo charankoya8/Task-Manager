@@ -1,24 +1,79 @@
-# Task Manager — Frontend (Vite + React)
+# Task Manager
 
-This workspace currently contains a frontend-only Task Manager app built with React and Vite. The app uses localStorage for persistence and provides the following features:
+A Full Stack Task Management Application built using React, Node.js, Express.js, and MongoDB.
 
-- Add Task
-- Delete Task
-- Edit Task
-- Complete / Undo Task
-- Due Dates
-- Statistics Dashboard (Total, Completed, Pending)
-- Filters (All / Completed / Pending)
-- Local Storage Persistence
-- Professional dark UI
+## Features
 
-## Folder Structure
+- Add Tasks
+- Edit Tasks
+- Delete Tasks
+- Mark Tasks as Completed
+- Statistics Dashboard
+- MongoDB Database Storage
+- Responsive User Interface
 
-client/ — React frontend (Vite)
+## Project Structure
 
-## Quick Setup
+```
+Task-Manager/
+│
+├── client/      # React Frontend
+├── server/      # Node.js + Express Backend
+├── screenshots/
+└── README.md
+```
 
-1. Frontend
+## Tech Stack
+
+### Frontend
+- React.js
+- Vite
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+
+## Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/charankoya8/Task-Manager.git
+cd Task-Manager
+```
+
+### 2. Backend Setup
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside the `server` folder:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+```
+
+Start the backend:
+
+```bash
+npm start
+```
+
+Backend runs on:
+
+```text
+http://localhost:5000
+```
+
+### 3. Frontend Setup
+
+Open a new terminal:
 
 ```bash
 cd client
@@ -26,8 +81,30 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 to view the app.
+Frontend runs on:
 
-## Notes
+```text
+http://localhost:5173
+```
 
-- This repository was reverted to a frontend-only version. Any backend or API code was removed or neutralized. The app persists tasks in the browser using `localStorage`.
+## Screenshots
+
+### Home Page
+
+![Home](screenshots/Home.png)
+
+### Add Task
+
+![Add Task](screenshots/Add-Task.png)
+
+### Edit Task
+
+![Edit Task](screenshots/Edit-Task.png)
+
+### Delete Task
+
+![Delete Task](screenshots/Deleting-Task.png)
+
+## Author
+
+Charan Koya
