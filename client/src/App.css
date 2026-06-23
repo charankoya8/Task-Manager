@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f172a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding-bottom: 40px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+}
+
+.heading p {
+  color: #94a3b8;
+  margin-top: 10px;
+}
+
+/* Statistics + Progress */
+
+.stats-row {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.stat-card {
+  flex:1;
+  background:#071229;
+  padding:14px;
+  border-radius:10px;
+  text-align:center;
+}
+.stat-card h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  color: #94a3b8;
+}
+
+.progress-card { flex:1.5; background:#071229; padding:12px 14px; border-radius:10px }
+.progress-text { color:#94a3b8; font-size:13px; margin-bottom:8px }
+.progress-bar { background:#0b1220; height:10px; border-radius:10px; overflow:hidden }
+.progress-fill { height:100%; background:linear-gradient(90deg,#3b82f6,#22c55e); width:0 }
+
+/* Filters */
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter-btn:hover {
+  background: #334155;
+}
+
+.filter-btn.active {
+  background: #3b82f6;
+}
+
+/* Controls (search, sort, category, clear) */
+.controls { display:flex; gap:10px; align-items:center; margin-bottom:12px }
+.search { flex:1; padding:12px 14px; border-radius:8px; border:none; background:#071229; color:white }
+.sort, .category-filter { padding:10px; border-radius:8px; background:#071229; border:none; color:white }
+.clear-completed { background:#ef4444; color:white; padding:10px 12px; border:none; border-radius:8px; cursor:pointer }
+
+/* Input Section */
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-section input {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-section input[type="date"] {
+  padding: 15px;
+}
+
+.input-section button {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+}
+
+/* Task List */
+
+.task-list {
+  margin-top: 25px;
+}
+
+.task-item {
+  background: linear-gradient(180deg, #0f1724, #111827);
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.task-item:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(2,6,23,0.6) }
+
+.task-main { flex:1 }
+.task-title { font-weight:600; margin-bottom:8px }
+.meta { display:flex; gap:8px; align-items:center; color:#94a3b8; font-size:13px }
+.badge { padding:6px 8px; border-radius:999px; font-size:12px; color:white; background:#1f2937 }
+.badge.priority.high { background:#ef4444 }
+.badge.priority.medium { background:#f59e0b }
+.badge.priority.low { background:#22c55e }
+.badge.category { background:#374151 }
+.due.today { color:#f59e0b }
+.due.overdue { color:#ef4444 }
+.due.upcoming { color:#60a5fa }
+
+.task-item input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.edit-row { display:flex; gap:8px; align-items:center }
+.edit-row input, .edit-row select { padding:8px; border-radius:8px; border:none; background:#071229; color:white }
+
+/* Buttons */
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.complete-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .input-section {
+    flex-direction: column;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .task-item {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
